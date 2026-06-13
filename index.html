@@ -276,7 +276,7 @@
             </div>
         </div>
 
-        <!-- 2. شاشة الفواتير -->
+        <!-- 2. شاشة الفواتير (مدمج بها نظام الدفع فوري) -->
         <div id="screen-b2b" class="app-screen">
             <div class="glass-card">
                 <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-file-invoice-dollar"></i> فواتير المبيعات</h4>
@@ -297,6 +297,25 @@
                     <h4 class="mt-2 text-success fw-bold">الإجمالي المستحق: <span id="invoiceFinalTotal">0</span> ج.م</h4>
                 </div>
                 <button class="gold-btn w-100 py-2" onclick="calculateLiveInvoice()"><i class="fa-solid fa-arrows-rotate"></i> تحديث الفاتورة</button>
+
+                <!-- قسم الدفع فوري (يظهر تلقائياً عند وجود مبيعات) -->
+                <div id="paymentSection" style="display: none;" class="mt-4 p-3 bg-white rounded border shadow-sm">
+                    <h6 class="text-center fw-bold text-dark mb-3">🔒 بوابة الدفع المباشرة لحساب المعرض (فوري)</h6>
+                    <div class="mb-3">
+                        <input type="text" id="clientNameInput" class="form-control text-center mb-2" placeholder="اسم السيدة / العميل الفاخر">
+                        <input type="tel" id="clientPhoneInput" class="form-control text-center" placeholder="رقم الهاتف المرتبط بالدفع">
+                    </div>
+                    <button class="btn btn-warning w-100 py-3 fw-bold text-dark shadow-sm rounded-3" style="background: #ffc107;" onclick="getRoyalFawryCode()">
+                        <i class="fa-solid fa-money-bill-wave me-2"></i> استخراج كود دفع فوري الموحد
+                    </button>
+                    
+                    <div id="fawryResultDisplay" class="mt-3 text-center p-3 bg-light rounded border border-warning" style="display: none;">
+                        <p class="mb-1 text-muted small">تفضلي بحفظ هذا الكود والدفع في أي منفذ فوري:</p>
+                        <h2 id="fawryCodeOutput" class="text-primary fw-bold tracking-wider my-2">00000000</h2>
+                        <span class="badge bg-dark">الاسم التجاري: رويال الكيم</span>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -622,11 +641,13 @@
         }
 
         async function calculateLiveInvoice() {
+            let finalTotal = 0;
             if(!activeInvoiceItems.length) {
                 document.getElementById('invoiceTierName').innerText = "حساب قياسي";
                 document.getElementById('invoiceTierName').className = "text-info fw-bold";
                 document.getElementById('invoiceInitialTotal').innerText = "0";
                 document.getElementById('invoiceFinalTotal').innerText = "0";
+                document.getElementById('paymentSection').style.display = 'none';
                 return;
             }
             
@@ -649,48 +670,92 @@
                     }
                     document.getElementById('invoiceInitialTotal').innerText = data.initial_total.toFixed(2);
                     document.getElementById('invoiceFinalTotal').innerText = data.final_total.toFixed(2);
-                    return;
+                    finalTotal = data.final_total;
                 }
             } catch(e) { 
                 console.warn("استخدام الحساب المحلي للفواتير نتيجة تعطل خادم السيرفر...");
-            }
+                let initialTotal = 0;
+                let tierName = "حساب قياسي";
+                let discountMultiplier = 1.0;
 
-            let initialTotal = 0;
-            let finalTotal = 0;
-            let tierName = "حساب قياسي";
-            let discountMultiplier = 1.0;
+                activeInvoiceItems.forEach(item => {
+                    initialTotal += item.price_card_1 * item.qty;
+                });
 
-            activeInvoiceItems.forEach(item => {
-                initialTotal += item.price_card_1 * item.qty;
-            });
-
-            if (secretCode === "ROYAL10") {
-                tierName = "كبار العملاء البرونزي (VIP 10%)";
-                discountMultiplier = 0.90;
-            } else if (secretCode === "ROYAL20") {
-                tierName = "كبار العملاء الفضي (VIP 20%)";
-                discountMultiplier = 0.80;
-            } else if (secretCode === "ELCHIM50") {
-                tierName = "الحساب الملكي الماسي (VIP 50%)";
-                discountMultiplier = 0.50;
-            } else if (secretCode.length > 0) {
-                tierName = "كود خصم غير فعال";
-            }
-
-            activeInvoiceItems.forEach(item => {
-                const itemCost = item.price_card_1 * item.qty;
-                if (item.is_fixed_price) {
-                    finalTotal += itemCost; 
-                } else {
-                    finalTotal += itemCost * discountMultiplier;
+                if (secretCode === "ROYAL10") {
+                    tierName = "كبار العملاء البرونزي (VIP 10%)";
+                    discountMultiplier = 0.90;
+                } else if (secretCode === "ROYAL20") {
+                    tierName = "كبار العملاء الفضي (VIP 20%)";
+                    discountMultiplier = 0.80;
+                } else if (secretCode === "ELCHIM50") {
+                    tierName = "الحساب الملكي الماسي (VIP 50%)";
+                    discountMultiplier = 0.50;
+                } else if (secretCode.length > 0) {
+                    tierName = "كود خصم غير فعال";
                 }
-            });
 
-            const tierSpan = document.getElementById('invoiceTierName');
-            tierSpan.innerText = tierName;
-            tierSpan.className = discountMultiplier < 1.0 ? "text-warning fw-bold" : "text-info fw-bold";
-            document.getElementById('invoiceInitialTotal').innerText = initialTotal.toFixed(2);
-            document.getElementById('invoiceFinalTotal').innerText = finalTotal.toFixed(2);
+                activeInvoiceItems.forEach(item => {
+                    const itemCost = item.price_card_1 * item.qty;
+                    if (item.is_fixed_price) {
+                        finalTotal += itemCost; 
+                    } else {
+                        finalTotal += itemCost * discountMultiplier;
+                    }
+                });
+
+                const tierSpan = document.getElementById('invoiceTierName');
+                tierSpan.innerText = tierName;
+                tierSpan.className = discountMultiplier < 1.0 ? "text-warning fw-bold" : "text-info fw-bold";
+                document.getElementById('invoiceInitialTotal').innerText = initialTotal.toFixed(2);
+                document.getElementById('invoiceFinalTotal').innerText = finalTotal.toFixed(2);
+            }
+
+            // إظهار قسم الدفع فوري إذا كان هناك مبلغ مستحق
+            if(finalTotal > 0) {
+                document.getElementById('paymentSection').style.display = 'block';
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+            }
+        }
+
+        // --- دالة التواصل مع نظام فوري المضافة حديثاً ---
+        async function getRoyalFawryCode() {
+            const finalTotal = parseFloat(document.getElementById('invoiceFinalTotal').innerText);
+            const name = document.getElementById('clientNameInput').value || "عميل رويال";
+            const phone = document.getElementById('clientPhoneInput').value;
+            const randomInvoiceId = "ROYAL-" + Math.floor(Math.random() * 1000000); 
+            
+            if(!phone || phone.length < 10) {
+                showToast("فضلاً، أدخلي رقم هاتف صحيح لإصدار كود فوري الخاص بكِ.", "warning");
+                return;
+            }
+            
+            showToast("جاري الاتصال بنظام فوري المعرض لإصدار الكود القانوني...", "info");
+            
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/payment/fawry_code`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        amount_egp: finalTotal,
+                        client_name: name,
+                        client_phone: phone,
+                        invoice_id: randomInvoiceId
+                    })
+                });
+                const data = await res.json();
+                
+                if(data.status === 'success' && data.fawry_code) {
+                    document.getElementById('fawryCodeOutput').innerText = data.fawry_code;
+                    document.getElementById('fawryResultDisplay').style.display = 'block';
+                    showToast("تم إصدار كود الدفع بنجاح وموجه مباشرة لحساب المعرض القانوني!", "success");
+                } else {
+                    showToast(data.message || "فشل الاتصال، يرجى مراجعة بيانات تاجر فوري.", "danger");
+                }
+            } catch (err) {
+                showToast("تعذر الوصول لسيرفر فوري، تأكد من اتصال السيرفر بالإنترنت.", "danger");
+            }
         }
 
         function formatResponse(text) {
