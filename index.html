@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>Royal Elchim - الوعي الجمالي الشامل</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes aurora { 
+            0% { background-position: 0% 50%; } 
+            50% { background-position: 100% 50%; } 
+            100% { background-position: 0% 50%; } 
+        }
+
+        body { 
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #d4fc79, #96e6a1, #fff1eb, #f1eefc); 
+            background-size: 300% 300%; 
+            animation: aurora 15s ease infinite; 
+            color: #1a1a2e;
+            font-family: 'Times New Roman', 'Noto Sans Arabic', serif; 
+            padding-bottom: 95px; 
+            min-height: 100vh; 
+            overflow-x: hidden;
+        }
+
+        .gold-text { color: #b58900; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); font-weight: bold; }
+        
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.88); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(181, 137, 0, 0.35); 
+            border-radius: 20px; 
+            padding: 25px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 45px rgba(0, 0, 0, 0.05); 
+        }
+
+        .gold-btn { 
+            background: linear-gradient(45deg, #b58900, #e5b82c, #b58900); 
+            color: #fff; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 10px; 
+            padding: 12px; 
+            transition: 0.3s; 
+            width: 100%; 
+            text-align: center; 
+            display: block; 
+            text-decoration: none; 
+            cursor: pointer; 
+        }
+        .gold-btn:hover { 
+            background: linear-gradient(45deg, #e5b82c, #f3e5ab, #e5b82c); 
+            color: #1a1a2e; 
+            transform: scale(1.02); 
+        }
+
+        .bottom-nav { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(181, 137, 0, 0.4); 
+            display: flex; 
+            overflow-x: auto; 
+            white-space: nowrap; 
+            padding: 12px 5px; 
+            z-index: 1000;
+            -webkit-overflow-scrolling: touch; 
+            scroll-behavior: smooth;
+        }
+        .bottom-nav::-webkit-scrollbar { display: none; }
+        .nav-item { 
+            text-align: center; 
+            color: #555577; 
+            cursor: pointer; 
+            flex: 0 0 auto; 
+            min-width: 82px; 
+            font-size: 0.72rem; 
+            transition: 0.3s; 
+        }
+        .nav-item i { font-size: 1.35rem; display: block; margin-bottom: 4px; }
+        .nav-item.active { 
+            color: #b58900; 
+            font-weight: bold; 
+            transform: translateY(-2px); 
+            text-shadow: 0 0 10px rgba(181, 137, 0, 0.45); 
+        }
+
+        .app-screen { display: none; animation: fadeIn 0.45s ease-out; }
+        .app-screen.active { display: block; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(12px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .royal-response { 
+            background: rgba(181, 137, 0, 0.05); 
+            border-top: 2px solid #b58900; 
+            border-bottom: 2px solid #b58900; 
+            padding: 20px; 
+            margin-top: 20px; 
+            white-space: pre-line; 
+            text-align: right; 
+            line-height: 1.8; 
+            border-radius: 12px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+        .preview-img { max-width: 100%; max-height: 160px; border-radius: 12px; border: 2px solid #b58900; margin-top: 10px; object-fit: cover; }
+        .vault-img { max-width: 90px; max-height: 90px; border-radius: 6px; border: 1px solid #b58900; margin-top: 5px; object-fit: cover; }
+        
+        .manifesto-badge { 
+            border-right: 4px solid #b58900; 
+            padding-right: 15px; 
+            margin-bottom: 15px; 
+            background: rgba(255, 255, 255, 0.5); 
+            padding: 15px; 
+            border-radius: 8px; 
+            transition: 0.3s;
+        }
+        .manifesto-badge:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateX(-5px);
+        }
+
+        .form-control { 
+            background-color: rgba(255, 255, 255, 0.95) !important; 
+            border: 1px solid rgba(181, 137, 0, 0.4) !important; 
+            color: #1a1a2e !important; 
+            border-radius: 10px;
+        }
+        .form-control:focus { 
+            box-shadow: 0 0 12px rgba(181, 137, 0, 0.4) !important; 
+            border-color: #b58900 !important; 
+        }
+        .play-voice-btn { 
+            background: #b58900; 
+            color: #fff; 
+            border: none; 
+            border-radius: 6px; 
+            padding: 8px 18px; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            font-size: 0.9rem; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: 0.2s;
+        }
+        .play-voice-btn:hover { background: #e5b82c; color: #1a1a2e; }
+
+        .mic-btn {
+            position: absolute; 
+            left: 10px; 
+            bottom: 10px;
+            background: rgba(212, 175, 55, 0.15); 
+            color: #b58900;
+            border: 1px solid #b58900; 
+            border-radius: 50%;
+            width: 42px; 
+            height: 42px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            cursor: pointer; 
+            transition: 0.3s; 
+            z-index: 10;
+        }
+        .mic-btn:hover { background: rgba(212, 175, 55, 0.35); }
+        
+        .listening { 
+            background-color: #ff4d4d !important; 
+            color: white !important; 
+            border-color: #ff4d4d !important; 
+            animation: pulse 1.2s infinite; 
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        .royal-logo-container {
+            width: 130px; 
+            height: 130px; 
+            margin: 0 auto 15px auto;
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 3px solid #b58900;
+            box-shadow: 0 6px 20px rgba(181, 137, 0, 0.35);
+            transition: all 0.4s ease-in-out; 
+            position: relative;
+            background: #fff;
+        }
+        .royal-logo-container img { width: 100%; height: 100%; object-fit: cover; }
+        .royal-logo-container.listening-pulse {
+            box-shadow: 0 0 35px rgba(255, 77, 77, 0.85), 0 0 20px #b58900;
+            transform: scale(1.06); 
+            animation: royalBreathe 1.2s infinite alternate; 
+            border-color: #ff4d4d;
+        }
+        @keyframes royalBreathe {
+            0% { box-shadow: 0 0 15px rgba(181, 137, 0, 0.6); }
+            100% { box-shadow: 0 0 45px rgba(255, 77, 77, 0.95), 0 0 25px #b58900; }
+        }
+
+        #toastContainer {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 350px;
+        }
+        .custom-toast {
+            background: rgba(25, 25, 35, 0.9);
+            color: #fff;
+            border-right: 5px solid #b58900;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toastContainer"></div>
+
+    <div class="container pt-4 text-center">
+        <div id="mainRoyalLogo" class="royal-logo-container">
+            <img src="Untitled-2_2.jpg" alt="Royal Elchim Logo" onerror="this.style.display='none'; document.getElementById('fallback-title').style.display='block';">
+        </div>
+        <h2 id="fallback-title" class="gold-text fw-bold mb-0 mt-2" style="display: none;">ROYAL ELCHIM</h2>
+        <p class="small text-muted mt-1 fw-bold" style="letter-spacing: 1px;">نظام الإدارة والوعي الجمالي الشامل</p>
+        
+        <div class="d-inline-flex align-items-center justify-content-center px-3 py-1.5 rounded-pill my-2 border border-warning shadow-sm" style="background: rgba(181, 137, 0, 0.12); font-size: 0.85rem; color: #8a6500; font-weight: bold; animation: pulse 2s infinite;">
+            <i class="fa-solid fa-circle-info text-warning me-2"></i>
+            <span>نسخة مجانية Demo لعملاء رويال الكيم مجاناً</span>
+        </div>
+    </div>
+
+    <div class="container mt-2">
+        
+        <!-- 1. شاشة الاستعلام والمخزون -->
+        <div id="screen-search" class="app-screen active">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-barcode"></i> الاستعلام والمخزون الحقيقي</h4>
+                
+                <div class="input-group mb-4" style="box-shadow: 0 4px 15px rgba(181,137,0,0.15); border-radius: 8px;">
+                    <button class="btn" style="background: rgba(212, 175, 55, 0.15); border: 1px solid #b58900; color: #b58900; border-radius: 0 8px 8px 0; transition: 0.3s;" onclick="startVoiceRecognition('royalSearchInput', this)" title="ابحث بصوتك">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <input type="text" id="royalSearchInput" class="form-control text-center py-2" style="border: 1px solid #b58900; border-left: none; border-right: none;" placeholder="ابحث بصوتك أو اكتب اسم الصنف..." oninput="debounceSearch(this.value)">
+                    <button class="btn gold-btn m-0" style="width: auto; border-radius: 8px 0 0 8px;" onclick="performRoyalSearch(document.getElementById('royalSearchInput').value)" title="بحث يدوي">
+                        <i class="fa-solid fa-magnifying-glass"></i> بحث
+                    </button>
+                </div>
+
+                <div id="searchResultsContainer"></div>
+            </div>
+        </div>
+
+        <!-- 2. شاشة الفواتير -->
+        <div id="screen-b2b" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-file-invoice-dollar"></i> فواتير المبيعات</h4>
+                <p class="text-muted small text-center mb-3">أضف المنتجات من شاشة الجرد. (الأسعار الخاصة تتفعل تلقائياً في الخلفية)</p>
+                
+                <div class="p-2 border border-warning rounded mb-3" style="background: rgba(212, 175, 55, 0.05);">
+                    <p class="small text-warning fw-bold m-0 mb-1 text-center"><i class="fa-solid fa-lock"></i> كود تفعيل العملاء (سري)</p>
+                    <div class="input-group">
+                        <input type="password" id="vipSecretCode" class="form-control text-center" placeholder="أدخل الكود السري هنا..." oninput="calculateLiveInvoice()">
+                    </div>
+                </div>
+
+                <div id="invoiceItemsContainer" class="mb-3"></div>
+                
+                <div class="p-3 bg-light rounded text-end mb-3 border border-secondary shadow-sm">
+                    <h5 class="m-0">نوع الحساب: <span id="invoiceTierName" class="text-info fw-bold">حساب قياسي</span></h5>
+                    <h6 class="text-muted mt-2">الإجمالي المبدئي: <span id="invoiceInitialTotal">0</span> ج.م</h6>
+                    <h4 class="mt-2 text-success fw-bold">الإجمالي المستحق: <span id="invoiceFinalTotal">0</span> ج.م</h4>
+                </div>
+                <button class="gold-btn w-100 py-2" onclick="calculateLiveInvoice()"><i class="fa-solid fa-arrows-rotate"></i> تحديث الفاتورة</button>
+            </div>
+        </div>
+
+        <!-- 3. شاشة العطور -->
+        <div id="screen-perfume" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-spray-can-sparkles"></i> الأثر العطري (تركيب الزيوت)</h4>
+                <p class="text-muted small text-center mb-3">دعي رويال مايند تترجم هيبتكِ إلى توليفة بالجرام من زيوتنا النادرة.</p>
+                <div class="position-relative mb-4">
+                    <textarea id="perfumeInput" class="form-control" rows="3" placeholder="تحدثي عن انطباعكِ أو المناسبة المنتظرة..." style="padding-left: 55px;"></textarea>
+                    <button class="mic-btn" onclick="startVoiceRecognition('perfumeInput', this)"><i class="fa-solid fa-microphone"></i></button>
+                </div>
+                <button class="gold-btn w-100 py-2" onclick="runChat('perfume', 'perfumeInput', 'perfumeResponse')">ابتكار التوقيع العطري</button>
+                <div id="perfumeResponse" class="royal-response" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- 4. شاشة المكياج -->
+        <div id="screen-makeup" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-paintbrush"></i> النحت الجمالي والموضة</h4>
+                <div class="position-relative mb-4">
+                    <textarea id="makeupInput" class="form-control" rows="3" placeholder="كيف ترغبين في إبراز حضوركِ اليوم؟..." style="padding-left: 55px;"></textarea>
+                    <button class="mic-btn" onclick="startVoiceRecognition('makeupInput', this)"><i class="fa-solid fa-microphone"></i></button>
+                </div>
+                <button class="gold-btn w-100 py-2" onclick="runChat('makeup', 'makeupInput', 'makeupResponse')">استشارة النحت والجمال</button>
+                <div id="makeupResponse" class="royal-response" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- 5. شاشة التخيل البصري (AR) -->
+        <div id="screen-simulation" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-camera-retro"></i> التخيل والتحليل البصري</h4>
+                <p class="text-muted small text-center mb-3">ارفعي صورتكِ السيلفي لتجربة المستحضرات بتقنية النحت البصري العائلي.</p>
+                
+                <div class="row text-center mb-3">
+                    <div class="col-6">
+                        <label class="btn btn-outline-warning w-100 p-2" style="border-color:#b58900; color:#b58900; font-weight:bold;"><i class="fa-solid fa-user"></i> صورة الوجه<input type="file" hidden accept="image/*" onchange="processAndPreviewImage(event, 'simSelfiePreview', 'selfieBase64')"></label>
+                        <div id="simSelfiePreview"></div>
+                    </div>
+                    <div class="col-6">
+                        <label class="btn btn-outline-warning w-100 p-2" style="border-color:#b58900; color:#b58900; font-weight:bold;"><i class="fa-solid fa-box-open"></i> المنتج (اختياري)<input type="file" hidden accept="image/*" onchange="processAndPreviewImage(event, 'simProductPreview', 'productBase64')"></label>
+                        <div id="simProductPreview"></div>
+                    </div>
+                </div>
+                
+                <input type="text" id="simProductName" class="form-control mb-3 text-center" placeholder="اسم منتج التجميل أو درجته">
+                
+                <select id="simMakeupType" class="form-control mb-3 text-center fw-bold" style="color: #b58900 !important; cursor: pointer;">
+                    <option value="lips">💄 روج للشفاه</option>
+                    <option value="eyeshadow">👁️ آيشادو للعيون</option>
+                    <option value="blush">😊 أحمر خدود (بلاشر)</option>
+                    <option value="foundation">✨ كريم أساس للبشرة</option>
+                    <option value="concealer">🎯 كونسيلر لإخفاء العيوب</option>
+                    <option value="powder">🪄 بودرة وجه ناعمة</option>
+                </select>
+
+                <button class="gold-btn w-100 py-2" onclick="runSimulation()">بدء النحت البصري والوجداني <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                <div id="simResponse" class="royal-response" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- 6. شاشة رويال مايند (التواصل) -->
+        <div id="screen-diagnosis" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-infinity"></i> استشارة الوعي الملكي</h4>
+                <p class="text-muted small text-center mb-3">تحدثي بصوتك مع رويال مايند... خبيرتكِ التي تعي ماضيكِ، وتصيغ لكِ مستقبلاً لا يُنسى.</p>
+                <div class="position-relative mb-4">
+                    <textarea id="diagnosisInput" class="form-control" rows="4" placeholder="اطرحي استفساركِ الجمالي هنا بكل حرية..." style="padding-left: 55px;"></textarea>
+                    <button class="mic-btn" onclick="startVoiceRecognition('diagnosisInput', this)"><i class="fa-solid fa-microphone"></i></button>
+                </div>
+                <button class="gold-btn w-100 py-2" onclick="runDiagnosis()">إطلاق حديث الوعي <i class="fa-solid fa-sparkles"></i></button>
+                <div id="diagResponse" class="royal-response" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- 7. شاشة المانيفستو والفلسفة الوجدانية -->
+        <div id="screen-manifesto" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-crown"></i> إرث رويال الكيم (منذ 1997)</h4>
+                <p class="text-center small text-warning mb-4" style="font-style: italic; font-weight: bold;">"الجمال ليس مصادفة تُرى.. بل مقامٌ رفيع يُقتنى."</p>
+                
+                <div class="p-3 rounded-4 text-center border border-warning shadow-sm mb-4" style="background: rgba(212, 175, 55, 0.05) !important;">
+                    <p class="lead gold-text fw-bold mb-2" style="font-size: 1.15rem;">لسنا خياراً، بل استحقاق</p>
+                    <p class="small text-muted m-0" style="line-height: 1.8; text-align: justify; direction: rtl;">
+                        منذ عام 1997، تفرّدنا بتقديم الرقي المتكامل لسيدات المجتمع المخملي. نحن لا نعرض مجرد مستحضرات تجميل أو عناية، بل نصوغ "مقتنيات" ترتقي لحاملها كما ترتقي المجوهرات النادرة. في رويال الكيم، ندرك أن الذوق الرفيع لا يلهث وراء المتاح، بل يبحث عن الاستثناء.. وهذا بالضبط ما نصنعه.
+                    </p>
+                </div>
+
+                <div class="manifesto-badge">
+                    <h5 class="gold-text" style="font-size: 1rem;"><i class="fa-solid fa-gem"></i> الجوهر الشامل والأصيل</h5>
+                    <p class="small text-muted m-0" style="line-height: 1.6; text-align: justify;">
+                        تاريخنا لا يعتمد على منتج واحد، بل هو منظومة جمال متكاملة لا تقبل التنازلات. كل مستحضر يحمل توقيعنا صُمّم ليكون بصمة لا تُمحى، وإضافة لا غنى عنها في خزانة من تعرف قدر نفسها.
+                    </p>
+                </div>
+
+                <div class="manifesto-badge">
+                    <h5 class="gold-text" style="font-size: 1rem;"><i class="fa-solid fa-chess-queen"></i> مقام الاستثناء</h5>
+                    <p class="small text-muted m-0" style="line-height: 1.6; text-align: justify;">
+                        نحن لا ننافس في ساحات العرض المفتوحة، لأن الجمال الحقيقي في نظرنا هو "حالة" من السطوة الهادئة. رويال الكيم وُجدت لتتوج النخبة، لمن ترفض العادي وتليق بها القمة وحدها.
+                    </p>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center p-3 rounded-pill mt-4 shadow-sm text-center" style="background: rgba(181, 137, 0, 0.05); border-left: 3px solid #b58900; border-right: 3px solid #b58900;">
+                    <span class="fw-bold gold-text" style="font-size: 1.05rem; letter-spacing: 0.5px;">
+                        <i class="fa-solid fa-signature me-2"></i> رويال الكيم... لأن المقامات الرفيعة تختار بعضها.
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. شاشة السجلات الملكية -->
+        <div id="screen-vault" class="app-screen">
+            <div class="glass-card">
+                <h4 class="gold-text mb-3 text-center"><i class="fa-solid fa-book-journal-whills"></i> سجلات الوعي الذاتي</h4>
+                <div class="text-center mb-3 small text-muted">سجلات الذاكرة النشطة: <span id="savedImagesCountText" class="gold-text fw-bold">0</span></div>
+                <button class="btn btn-sm btn-outline-danger d-block mx-auto mb-3 fw-bold" onclick="clearAllVault()"><i class="fa-solid fa-trash-can"></i> مسح الذاكرة</button>
+                <div id="vaultContainer" style="max-height: 400px; overflow-y: auto; text-align: right;"></div>
+            </div>
+        </div>
+
+        <!-- 9. شاشة الإدارة -->
+        <div id="screen-admin" class="app-screen">
+            <div class="glass-card text-center py-5">
+                <h4 class="gold-text mb-4"><i class="fa-solid fa-user-gear"></i> بوابة الإدارة والمحاسبة</h4>
+                <a href="https://www.royalelchim.app/acc" target="_blank" class="gold-btn py-3 px-5 mx-auto" style="max-width: 320px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> دخول النظام المحاسبي</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('search', this)"><i class="fa-solid fa-barcode"></i><span>الاستعلام</span></div>
+        <div class="nav-item" onclick="switchTab('b2b', this)"><i class="fa-solid fa-file-invoice-dollar"></i><span>الفواتير</span></div>
+        <div class="nav-item" onclick="switchTab('perfume', this)"><i class="fa-solid fa-spray-can"></i><span>عطور</span></div>
+        <div class="nav-item" onclick="switchTab('makeup', this)"><i class="fa-solid fa-paintbrush"></i><span>مكياج</span></div>
+        <div class="nav-item" onclick="switchTab('simulation', this)"><i class="fa-solid fa-camera-retro"></i><span>بصري</span></div>
+        <div class="nav-item" onclick="switchTab('diagnosis', this)"><i class="fa-solid fa-infinity"></i><span>استشارة</span></div>
+        <div class="nav-item" onclick="switchTab('manifesto', this)"><i class="fa-solid fa-book-open-reader"></i><span>فلسفة</span></div>
+        <div class="nav-item" onclick="switchTab('vault', this)"><i class="fa-solid fa-folder-open"></i><span>الذاكرة</span></div>
+        <div class="nav-item" onclick="switchTab('admin', this)"><i class="fa-solid fa-user-gear"></i><span>الإدارة</span></div>
+    </div>
+
+    <script>
+        const BACKEND_URL = "https://royalmind-api-production-2448.up.railway.app";
+        let searchTimer;
+        let imagesData = { selfieBase64: null, productBase64: null };
+        let activeInvoiceItems = [];
+
+        window.onload = () => { 
+            renderVault(); 
+            renderInvoiceDOM(); 
+        };
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.innerHTML = `
+                <span>${message}</span>
+                <i class="fa-solid fa-xmark ms-3" style="cursor:pointer;" onclick="this.parentElement.remove()"></i>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transition = 'opacity 0.5s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        function switchTab(id, el) {
+            document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('screen-' + id).classList.add('active');
+            el.classList.add('active');
+            el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+
+        function startVoiceRecognition(inputId, btnElement) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                showToast("عذراً، حاسة السمع غير مدعومة في متصفحك. يرجى استخدام متصفح يدعم هذه الخاصية.", "danger");
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ar-EG'; 
+            recognition.interimResults = false;
+            
+            const logoContainer = document.getElementById('mainRoyalLogo');
+            
+            recognition.onstart = function() {
+                btnElement.classList.add('listening');
+                logoContainer.classList.add('listening-pulse');
+                document.getElementById(inputId).placeholder = "رويال مايند تصغي إليكِ الآن...";
+            };
+            
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                const inputElement = document.getElementById(inputId);
+                inputElement.value += (inputElement.value ? " " : "") + speechResult;
+                
+                if(inputId === 'royalSearchInput') {
+                    debounceSearch(inputElement.value);
+                }
+            };
+            
+            recognition.onend = function() {
+                btnElement.classList.remove('listening');
+                logoContainer.classList.remove('listening-pulse');
+                document.getElementById(inputId).placeholder = "تحدثي أو اكتب هنا...";
+            };
+            
+            recognition.onerror = function(event) {
+                btnElement.classList.remove('listening');
+                logoContainer.classList.remove('listening-pulse');
+            };
+            
+            recognition.start();
+        }
+
+        function debounceSearch(val) {
+            clearTimeout(searchTimer);
+            if(val.length < 2) return;
+            searchTimer = setTimeout(() => performRoyalSearch(val), 500);
+        }
+
+        const fallbackDatabase = [
+            { name: "Black Royal Lion - العطر الأسود المزلزل", barcode: "9001", price_card_1: 1850, luxor_lotus_qty: 12, marrowa_qty: 3, hurgada_qty: 8, online_qty: 25, is_fixed_price: true, show_link: false },
+            { name: "Shadow Velvet Scorpion - أثر العقرب الغامض", barcode: "9002", price_card_1: 2200, luxor_lotus_qty: 5, marrowa_qty: 0, hurgada_qty: 14, online_qty: 19, is_fixed_price: false, show_link: false },
+            { name: "Royal Shine Sagittarius - توقيع القوس المتلألئ", barcode: "9003", price_card_1: 1950, luxor_lotus_qty: 18, marrowa_qty: 6, hurgada_qty: 0, online_qty: 40, is_fixed_price: false, show_link: false },
+            { name: "Rose Noire De L'Est - التناقض الجمالي المظلم", barcode: "9004", price_card_1: 2500, luxor_lotus_qty: 4, marrowa_qty: 2, hurgada_qty: 3, online_qty: 10, is_fixed_price: true, show_link: false }
+        ];
+
+        async function performRoyalSearch(query) {
+            const container = document.getElementById('searchResultsContainer');
+            container.innerHTML = "<p class='text-center gold-text'><i class='fa-solid fa-spinner fa-spin'></i> جاري استدعاء المُدركات...</p>";
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/search?query=${encodeURIComponent(query)}`);
+                const result = await res.json();
+                if(result.status === 'success' && result.data.length > 0) {
+                    renderSearchResults(result.data, container);
+                } else { 
+                    searchFallback(query, container);
+                }
+            } catch { 
+                searchFallback(query, container);
+            }
+        }
+
+        function searchFallback(query, container) {
+            const filtered = fallbackDatabase.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+            if(filtered.length > 0) {
+                renderSearchResults(filtered, container);
+            } else {
+                container.innerHTML = "<p class='text-center text-muted p-3'>هذا الصنف غائب عن الإدراك حالياً في السيرفر وقاعدة البيانات التجريبية.</p>";
+            }
+        }
+
+        function renderSearchResults(data, container) {
+            container.innerHTML = data.map(item => `
+                <div class="glass-card mb-2 p-3" style="border-right: 4px solid var(--bs-warning); text-align: right;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="gold-text fw-bold" style="font-size:1.1rem;">${item.name} ${item.is_fixed_price ? '<span class="badge bg-danger small ms-1" style="font-size:0.7rem;">سعر ثابت</span>' : ''}</span>
+                        <button class="btn btn-sm btn-outline-warning fw-bold" onclick='addtoInvoice(\"${encodeURIComponent(JSON.stringify(item))}\")'><i class="fa-solid fa-plus"></i> للفاتورة</button>
+                    </div>
+                    <div class="mt-2 p-2" style="background: rgba(0,0,0,0.03); border-radius: 8px;">
+                        <div class="d-flex justify-content-between small mb-1"><span>📍 الأقصر (اللوتس):</span> <span class="fw-bold ${item.luxor_lotus_qty > 0 ? 'text-success' : 'text-danger'}">${item.luxor_lotus_qty > 0 ? 'متوفر (' + item.luxor_lotus_qty + ')' : 'نفذ'}</span></div>
+                        <div class="d-flex justify-content-between small mb-1"><span>📍 الأقصر (المروة):</span> <span class="fw-bold ${item.marrowa_qty > 0 ? 'text-success' : 'text-danger'}">${item.marrowa_qty > 0 ? 'متوفر (' + item.marrowa_qty + ')' : 'نفذ'}</span></div>
+                        <div class="d-flex justify-content-between small mb-1"><span>📍 الغردقة:</span> <span class="fw-bold ${item.hurgada_qty > 0 ? 'text-success' : 'text-danger'}">${item.hurgada_qty > 0 ? 'متوفر (' + item.hurgada_qty + ')' : 'نفذ'}</span></div>
+                        <div class="d-flex justify-content-between small mb-1"><span>🌐 الأونلاين:</span> <span class="fw-bold ${item.online_qty > 0 ? 'text-success' : 'text-danger'}">${item.online_qty > 0 ? 'متوفر (' + item.online_qty + ')' : 'نفذ'}</span></div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3 align-items-center">
+                        <div><small class="text-muted d-block">باركود: ${item.barcode}</small><span class="h5 gold-text font-weight-bold">${item.price_card_1} ج.م</span></div>
+                        ${item.show_link ? `<a href="${item.link}" target="_blank" class="btn btn-sm gold-btn py-2 px-3" style="max-width:90px;"><i class="fa-solid fa-bag-shopping"></i> اقتناء</a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addtoInvoice(encodedItem) {
+            const item = JSON.parse(decodeURIComponent(encodedItem));
+            const exists = activeInvoiceItems.find(i => i.barcode === item.barcode);
+            if(exists) { 
+                exists.qty += 1; 
+            } else { 
+                item.qty = 1; 
+                activeInvoiceItems.push(item); 
+            }
+            showToast("تم إدراج " + item.name + " في الفاتورة بنجاح.");
+            renderInvoiceDOM();
+            calculateLiveInvoice();
+        }
+
+        function updateInvoiceQty(index, qty) {
+            if(qty <= 0) { 
+                activeInvoiceItems.splice(index, 1); 
+            } else { 
+                activeInvoiceItems[index].qty = parseInt(qty); 
+            }
+            renderInvoiceDOM();
+            calculateLiveInvoice();
+        }
+
+        function renderInvoiceDOM() {
+            const cont = document.getElementById('invoiceItemsContainer');
+            if(!activeInvoiceItems.length) { 
+                cont.innerHTML = "<p class='text-center text-muted py-3 border rounded'>الفاتورة خالية. أضف عناصر من سجل الاستعلام.</p>"; 
+                return; 
+            }
+            cont.innerHTML = activeInvoiceItems.map((item, index) => `
+                <div class="d-flex justify-content-between align-items-center bg-white p-2 rounded mb-2 border-end border-warning border-3 text-end shadow-sm">
+                    <div style="max-width: 80px;">
+                        <input type="number" class="form-control text-center p-1" value="${item.qty}" min="0" onchange="updateInvoiceQty(${index}, this.value)">
+                    </div>
+                    <div>
+                        <span class="fw-bold text-dark d-block small">${item.name}</span>
+                        <small class="text-muted">سعر الوحدة: ${item.price_card_1} ج.م</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function calculateLiveInvoice() {
+            if(!activeInvoiceItems.length) {
+                document.getElementById('invoiceTierName').innerText = "حساب قياسي";
+                document.getElementById('invoiceTierName').className = "text-info fw-bold";
+                document.getElementById('invoiceInitialTotal').innerText = "0";
+                document.getElementById('invoiceFinalTotal').innerText = "0";
+                return;
+            }
+            
+            const secretCode = document.getElementById('vipSecretCode').value;
+            
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/invoice/calculate`, {
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ items: activeInvoiceItems, secret_code: secretCode })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    const tierSpan = document.getElementById('invoiceTierName');
+                    tierSpan.innerText = data.tier_name;
+                    if(data.vip_activated || data.applied_tier > 1) {
+                        tierSpan.className = "text-warning fw-bold";
+                    } else {
+                        tierSpan.className = "text-info fw-bold";
+                    }
+                    document.getElementById('invoiceInitialTotal').innerText = data.initial_total.toFixed(2);
+                    document.getElementById('invoiceFinalTotal').innerText = data.final_total.toFixed(2);
+                    return;
+                }
+            } catch(e) { 
+                console.warn("استخدام الحساب المحلي للفواتير نتيجة تعطل خادم السيرفر...");
+            }
+
+            let initialTotal = 0;
+            let finalTotal = 0;
+            let tierName = "حساب قياسي";
+            let discountMultiplier = 1.0;
+
+            activeInvoiceItems.forEach(item => {
+                initialTotal += item.price_card_1 * item.qty;
+            });
+
+            if (secretCode === "ROYAL10") {
+                tierName = "كبار العملاء البرونزي (VIP 10%)";
+                discountMultiplier = 0.90;
+            } else if (secretCode === "ROYAL20") {
+                tierName = "كبار العملاء الفضي (VIP 20%)";
+                discountMultiplier = 0.80;
+            } else if (secretCode === "ELCHIM50") {
+                tierName = "الحساب الملكي الماسي (VIP 50%)";
+                discountMultiplier = 0.50;
+            } else if (secretCode.length > 0) {
+                tierName = "كود خصم غير فعال";
+            }
+
+            activeInvoiceItems.forEach(item => {
+                const itemCost = item.price_card_1 * item.qty;
+                if (item.is_fixed_price) {
+                    finalTotal += itemCost; 
+                } else {
+                    finalTotal += itemCost * discountMultiplier;
+                }
+            });
+
+            const tierSpan = document.getElementById('invoiceTierName');
+            tierSpan.innerText = tierName;
+            tierSpan.className = discountMultiplier < 1.0 ? "text-warning fw-bold" : "text-info fw-bold";
+            document.getElementById('invoiceInitialTotal').innerText = initialTotal.toFixed(2);
+            document.getElementById('invoiceFinalTotal').innerText = finalTotal.toFixed(2);
+        }
+
+        function formatResponse(text) {
+            let encoded = encodeURIComponent(text);
+            return `<div>${text}</div><button class="play-voice-btn" onclick="playVoice(decodeURIComponent('${encoded}'))"><i class="fa-solid fa-volume-high"></i> استمع للرد</button>`;
+        }
+        
+        function playVoice(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/[\*#]/g, '');
+                let utterance = new SynthesisUtterance(cleanText);
+                utterance.lang = 'ar-SA'; 
+                utterance.rate = 0.88;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                showToast("حاسة النطق الصوتي غير مدعومة على جهازك الحالي.", "warning");
+            }
+        }
+
+        function getLocalHistoryContext() {
+            try { 
+                let historyArray = JSON.parse(localStorage.getItem('royal_vault_data') || "[]").slice(0, 5);
+                return historyArray.reverse().map(i => `[${i.date} - ${i.type}]\nالعميل: ${i.userText}\nرويال مايند: ${i.aiText}`).join("\n\n"); 
+            } catch(e) { return ""; }
+        }
+
+        function saveToVault(type, userText, aiText, image = null) {
+            try {
+                let vault = JSON.parse(localStorage.getItem('royal_vault_data') || "[]");
+                vault.unshift({
+                    id: Date.now(),
+                    date: new Date().toLocaleDateString('ar-EG', {hour: '2-digit', minute:'2-digit'}),
+                    type: type,
+                    userText: userText,
+                    aiText: aiText,
+                    image: image
+                });
+                localStorage.setItem('royal_vault_data', JSON.stringify(vault));
+                renderVault();
+            } catch(e) {
+                console.error("خطأ أثناء الكتابة في سجلات الوعي الملكي", e);
+            }
+        }
+
+        function renderVault() {
+            const container = document.getElementById('vaultContainer');
+            const countText = document.getElementById('savedImagesCountText');
+            try {
+                const vault = JSON.parse(localStorage.getItem('royal_vault_data') || "[]");
+                countText.innerText = vault.length;
+                if(!vault.length) {
+                    container.innerHTML = "<p class='text-center text-muted py-4'>ذاكرة السجلات خالية حالياً.</p>";
+                    return;
+                }
+                container.innerHTML = vault.map(item => `
+                    <div class="p-3 mb-3 border-bottom" style="background: rgba(255,255,255,0.4); border-radius:10px;">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-warning text-dark font-weight-bold" style="font-size: 0.75rem;">${item.type}</span>
+                            <small class="text-muted">${item.date}</small>
+                        </div>
+                        <p class="mb-1 small"><strong>المدخل الجمالي:</strong> ${item.userText}</p>
+                        <p class="mb-2 small text-muted"><strong>الوعي الملكي:</strong> ${item.aiText.slice(0, 150)}...</p>
+                        ${item.image ? `<img src="${item.image}" class="vault-img d-block mb-2">` : ''}
+                        <button class="btn btn-sm btn-link text-warning p-0 fw-bold" onclick="revisitHistory(${item.id})">استدعاء الجلسة كاملة</button>
+                    </div>
+                `).join('');
+            } catch(e) {
+                container.innerHTML = "<p class='text-danger text-center'>تعذر قراءة ملفات الوعي الجمالي.</p>";
+            }
+        }
+
+        function revisitHistory(id) {
+            const vault = JSON.parse(localStorage.getItem('royal_vault_data') || "[]");
+            const item = vault.find(i => i.id === id);
+            if(item) {
+                showToast(`تم استعادة التوجيه الجمالي لـ [${item.type}]`);
+                if(item.type === 'عطور') {
+                    switchTab('perfume', document.querySelectorAll('.nav-item')[2]);
+                    document.getElementById('perfumeInput').value = item.userText;
+                    const resp = document.getElementById('perfumeResponse');
+                    resp.style.display = 'block';
+                    resp.innerHTML = formatResponse(item.aiText);
+                } else if(item.type === 'مكياج') {
+                    switchTab('makeup', document.querySelectorAll('.nav-item')[3]);
+                    document.getElementById('makeupInput').value = item.userText;
+                    const resp = document.getElementById('makeupResponse');
+                    resp.style.display = 'block';
+                    resp.innerHTML = formatResponse(item.aiText);
+                } else if(item.type === 'بصري') {
+                    switchTab('simulation', document.querySelectorAll('.nav-item')[4]);
+                    document.getElementById('simProductName').value = item.userText;
+                    const resp = document.getElementById('simResponse');
+                    resp.style.display = 'block';
+                    resp.innerHTML = formatResponse(item.aiText);
+                } else {
+                    switchTab('diagnosis', document.querySelectorAll('.nav-item')[5]);
+                    document.getElementById('diagnosisInput').value = item.userText;
+                    const resp = document.getElementById('diagResponse');
+                    resp.style.display = 'block';
+                    resp.innerHTML = formatResponse(item.aiText);
+                }
+            }
+        }
+
+        function clearAllVault() {
+            if(confirm("هل أنت متأكد من مسح الذاكرة بالكامل وتصفير سجلات الوعي؟")) {
+                localStorage.removeItem('royal_vault_data');
+                renderVault();
+                showToast("تم تصفير قنوات الوعي بنجاح.");
+            }
+        }
+
+        async function runChat(type, inputId, responseId) {
+            const userText = document.getElementById(inputId).value;
+            const out = document.getElementById(responseId);
+            if(!userText) return;
+
+            out.style.display = 'block';
+            out.innerHTML = "<span class='gold-text'><i class='fa-solid fa-spinner fa-spin'></i> جاري استخلاص المفاهيم الجمالية...</span>";
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/chat`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        text: userText,
+                        category: type,
+                        history_context: getLocalHistoryContext()
+                    })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    out.innerHTML = formatResponse(data.answer);
+                    saveToVault(type === 'perfume' ? 'عطور' : 'مكياج', userText, data.answer);
+                } else {
+                    throw new Error("Server Error");
+                }
+            } catch {
+                let localResponse = "نوصيك بزيارة الفرع لاستشارة الموضة والجمال المباشرة... لأن المقامات الرفيعة تختار أصحابها.";
+                out.innerHTML = formatResponse(localResponse);
+            }
+        }
+
+        function processAndPreviewImage(event, previewId, storageKey) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagesData[storageKey] = e.target.result;
+                document.getElementById(previewId).innerHTML = `<img src="${e.target.result}" class="preview-img mt-2 shadow">`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function runSimulation() {
+            const out = document.getElementById('simResponse');
+            const type = document.getElementById('simMakeupType').value;
+            const prodName = document.getElementById('simProductName').value || "مستحضر ملكي غامض";
+            
+            if(!imagesData.selfieBase64) {
+                showToast("يرجى رفع صورتكِ الشخصية (سيلفي) أولاً لتجربة المحاكاة الجمالية.", "warning");
+                return;
+            }
+
+            out.style.display = 'block';
+            out.innerHTML = "<span class='gold-text'><i class='fa-solid fa-spinner fa-spin'></i> جاري تحليل البنية البصرية ودمج الدرجات الجمالية للمنتج...</span>";
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/simulate_makeup`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        user_selfie: imagesData.selfieBase64,
+                        makeup_type: type,
+                        product_name_desc: prodName,
+                        history_context: getLocalHistoryContext()
+                    })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    out.innerHTML = `<img src="${data.result_image}" style="max-width:100%; border-radius:10px;" class="mb-3">` + formatResponse(data.simulation_result);
+                    saveToVault('بصري', `تجربة ${prodName} - ${type}`, data.simulation_result, data.result_image);
+                } else {
+                    throw new Error("Server Error");
+                }
+            } catch {
+                out.innerHTML = formatResponse("تعذر إكمال المحاكاة حالياً.");
+            }
+        }
+
+        async function runDiagnosis() {
+            let msg = document.getElementById('diagnosisInput').value;
+            let out = document.getElementById('diagResponse');
+            if(!msg) return;
+
+            out.style.display = 'block'; 
+            out.innerHTML = "<span class='gold-text'><i class='fa-solid fa-spinner fa-spin'></i> جاري استيعاب الفهم في بحر الوعي...</span>";
+            
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/diagnose`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        client_message: msg,
+                        history_context: getLocalHistoryContext()
+                    })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    out.innerHTML = formatResponse(data.diagnosis);
+                    saveToVault('للأبد', msg, data.diagnosis);
+                } else {
+                    throw new Error("Server Error");
+                }
+            } catch(err) {
+                out.innerHTML = formatResponse("استشارتنا الجمالية تنتظرك بفرعنا... فالأناقة لا تتأخر عن مواعيدها.");
+            }
+        }
+    </script>
+</body>
+</html>
